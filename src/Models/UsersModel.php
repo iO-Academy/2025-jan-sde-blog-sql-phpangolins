@@ -1,18 +1,71 @@
 <?php
 
-
-
-//prepare
-$query->setFetchMode(PDO::FETCH_CLASS, ProductEntity::class);
-//execute
-
 class UsersModel
 {
     public PDO $db;
 
-    public function __construct (PDO $db)
+    public function __construct(PDO $db)
     {
-        $this->db=$db;
+        $this->db = $db;
     }
 
+    public function checkUser(): bool|array
+    {
+        if (isset($_POST['submitted'])) {
+            $email = $_POST['email'];
+            $query = $this->db->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email;");
+
+            if ($query->execute([':email' => $email])) {
+               return $query->fetch();
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 }
+
+
+
+
+
+
+
+
+//            if ($query->execute(['email' => $email])) {
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        }
+//        return false;
+//    }
+//}
+
+//public function checkUserExists(): array|bool
+//
+//{
+//
+//    if (isset($_POST['submitted'])) {
+//
+//        $username = $_POST['username'];
+//
+//        $query = $this->db->prepare(
+//
+//            "SELECT `id`, `username`, `password`
+//
+//                    FROM `users`
+//
+//                    WHERE `username` = :username;");
+//
+//        if ($query->execute([':username' => $username])) {
+//
+//            return $query->fetch();
+//
+//        } return false;
+//
+//    }
+//
+//    return true;
+//
+//}

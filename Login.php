@@ -14,8 +14,17 @@
 </html>
 
 <?php
-session_start();
+//session_start();
 
 require_once 'src/Services/LoginFormService.php';
+require_once 'src/DatabaseConnectionServices.php';
+require_once 'src/Models/UsersModel.php';
+
+$db = DatabaseConnectionServices::connect();
+$user = new UsersModel($db);
+
+
+Echo '<pre>';
+var_dump ($user -> checkUser());
 
 echo LoginFormService::displayLoginForm();
