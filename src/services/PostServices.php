@@ -11,7 +11,7 @@ class PostServices
         $outcome .= "<article class='p-8 border border-solid rounded-md'>";
         $outcome .= '<div class="flex justify-between items-center flex-col md:flex-row mb-4">';
         $outcome .= "<h2 class='text-4xl'>" . $post->getTitle()."</h2></div>";
-        $outcome .= "<p class='text-2xl mb-2'>".date_format($date,"Y/m/d")." - By ".$post->getAuthor()."</p>";
+        $outcome .= "<p class='text-2xl mb-2'>".date_format($date,"d/m/y")." - By ".$post->getAuthor()."</p>";
         $outcome .= "<p>".substr($post->getContent(), 0, 100)."</p>";
         $outcome .= '<div class="flex justify-center">';
         $outcome .= '</div>';

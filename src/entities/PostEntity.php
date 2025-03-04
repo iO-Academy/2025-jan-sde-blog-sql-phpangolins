@@ -9,7 +9,7 @@ class PostEntity{
     private int $likes;
     private int $dislikes;
     private string $category;
-    private int $category2;
+    private string $category2;
 
     /**
      * @param int $id
@@ -20,9 +20,9 @@ class PostEntity{
      * @param int $likes
      * @param int $dislikes
      * @param string $category
-     * @param int $category2
+     * @param string $category2
      */
-    public function __construct(int $id = 1, string $title = '', ?string $author = '', string $content = '', string $date_time = '', int $likes = 1, int $dislikes = 1, string $category = '', int $category2 = 1)
+    public function __construct(int $id = 1, string $title = '', ?string $author = '', string $content = '', string $date_time = '', int $likes = 1, int $dislikes = 1, string $category = '', string $category2 = '')
     {
         $this->id = $id;
         $this->title = $title;
