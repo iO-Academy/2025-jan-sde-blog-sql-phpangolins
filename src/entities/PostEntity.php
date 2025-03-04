@@ -11,6 +11,31 @@ class PostEntity{
     private string $category;
     private int $category2;
 
+    /**
+     * @param int $id
+     * @param string $title
+     * @param string|null $author
+     * @param string $content
+     * @param string $date_time
+     * @param int $likes
+     * @param int $dislikes
+     * @param string $category
+     * @param int $category2
+     */
+    public function __construct(int $id = 1, string $title = '', ?string $author = '', string $content = '', string $date_time = '', int $likes = 1, int $dislikes = 1, string $category = '', int $category2 = 1)
+    {
+        $this->id = $id;
+        $this->title = $title;
+        $this->author = $author;
+        $this->content = $content;
+        $this->date_time = $date_time;
+        $this->likes = $likes;
+        $this->dislikes = $dislikes;
+        $this->category = $category;
+        $this->category2 = $category2;
+    }
+
+
     public function getId(): int
     {
         return $this->id;
