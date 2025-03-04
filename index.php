@@ -8,6 +8,20 @@
     <title>Blog</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<?php
+
+require_once 'src/entities/PostsEntity.php';
+require_once 'src/services/PostServices.php';
+require_once 'src/models/PostsModel.php';
+require_once 'src/services/DatabaseConnectionServices.php';
+
+$db = DatabaseConnectionServices::connect();
+
+$posts = new PostsModel($db);
+
+var_dump($posts->getAll());
+
+?>
 <body>
 
 </body>
