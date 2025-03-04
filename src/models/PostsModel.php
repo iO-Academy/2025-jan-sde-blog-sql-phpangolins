@@ -17,7 +17,7 @@ class PostsModel{
                                             ON `posts`.`category_id` = `categories`.`id`
                                             JOIN `users`
                                             ON `posts`.`user_id`=`users`.`id`;');
-        $query -> setFetchMode(PDO::FETCH_CLASS, PostsEntity::class);
+        $query -> setFetchMode(PDO::FETCH_CLASS, PostEntity::class);
         $query->execute();
         if ($query->execute()){
             return $query->fetchAll();

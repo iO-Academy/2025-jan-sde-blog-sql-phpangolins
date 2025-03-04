@@ -1,6 +1,6 @@
 <?php
 
-class PostsEntity{
+class PostEntity{
     private int $id;
     private string $title;
     private ?string $author;
