@@ -2,8 +2,9 @@
 
 session_start();
 
-Echo '<pre>';
-var_dump ($_SESSION);
+require_once 'src/Services/NavBarService.php';
+
+echo NavBarService::displayNavBar();
 
 
 ?>

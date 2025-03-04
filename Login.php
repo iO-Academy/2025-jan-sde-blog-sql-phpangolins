@@ -3,6 +3,7 @@
 require_once 'src/Services/LoginFormService.php';
 require_once 'src/DatabaseConnectionServices.php';
 require_once 'src/Models/UsersModel.php';
+require_once 'src/Services/NavBarService.php';
 
 session_start();
 
@@ -16,9 +17,10 @@ if (!$user -> checkUser() === false)
 }
 
 
-Echo '<pre>';
+echo '<pre>';
 var_dump ($user -> checkUser());
 
+echo NavBarService::displayNavBar();
 echo LoginFormService::displayLoginForm();
 
 ?>
