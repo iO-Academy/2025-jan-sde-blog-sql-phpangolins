@@ -1,3 +1,28 @@
+<?php
+
+require_once 'src/Services/LoginFormService.php';
+require_once 'src/DatabaseConnectionServices.php';
+require_once 'src/Models/UsersModel.php';
+
+session_start();
+
+$db = DatabaseConnectionServices::connect();
+$user = new UsersModel($db);
+
+if (!$user -> checkUser() === false)
+{
+    $_SESSION ['loggedIn'] = true;
+    header('Location:index.php');
+}
+
+
+Echo '<pre>';
+var_dump ($user -> checkUser());
+
+echo LoginFormService::displayLoginForm();
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,19 +37,3 @@
 
 </body>
 </html>
-
-<?php
-//session_start();
-
-require_once 'src/Services/LoginFormService.php';
-require_once 'src/DatabaseConnectionServices.php';
-require_once 'src/Models/UsersModel.php';
-
-$db = DatabaseConnectionServices::connect();
-$user = new UsersModel($db);
-
-
-Echo '<pre>';
-var_dump ($user -> checkUser());
-
-echo LoginFormService::displayLoginForm();

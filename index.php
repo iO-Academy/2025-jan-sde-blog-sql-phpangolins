@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+Echo '<pre>';
+var_dump ($_SESSION);
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,3 +23,4 @@
 
 </body>
 </html>
+
