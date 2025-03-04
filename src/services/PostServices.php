@@ -2,9 +2,8 @@
 require_once 'src/entities/PostEntity.php';
 class PostServices
 {
-
-    static public function displaySingleHomepage(PostEntity $post):string{
-
+    static public function displaySingleHomepage(PostEntity $post): string
+    {
         $date = date_create($post->getDateTime());
         $outcome = '';
 
@@ -20,9 +19,8 @@ class PostServices
         return $outcome;
     }
 
-
-
-    static public function displayHomepage(array $posts):string{
+    static public function displayHomepage(array $posts): string
+    {
 
         $outcome = "<section class='container lg:w-1/2 mx-auto flex flex-col gap-5'>";
 
