@@ -13,9 +13,10 @@ class UsersModel
     {
         if (isset($_POST['submitted'])) {
             $email = $_POST['email'];
-            $query = $this->db->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email;");
+            $password = $_POST['password'];
+            $query = $this->db->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email AND `password` = :password;");
 
-            if ($query->execute([':email' => $email])) {
+            if ($query->execute([':email' => $email, ':password' => $password])) {
                return $query->fetch();
             } else {
                 return false;
