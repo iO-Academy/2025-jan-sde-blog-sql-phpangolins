@@ -10,15 +10,29 @@ session_start();
 $db = DatabaseConnectionServices::connect();
 $user = new UsersModel($db);
 
-if (!$user -> checkUser() === false)
-{
-    $_SESSION ['loggedIn'] = true;
-    header('Location:index.php');
+if (isset($_POST['submitted'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    if (!$user -> checkUser($email, $password) === false) {
+        $_SESSION ['loggedIn'] = true;
+        header('Location:index.php');
+    }
 }
 
 
+//} else {
+//    LoginFormService::displayLoginForm();
+//}
+
+
+
+
+//echo '<pre>';
+//var_dump ($user -> checkUser());
+
 echo '<pre>';
-var_dump ($user -> checkUser());
+var_dump ($_SESSION);
+
 
 echo NavBarService::displayNavBar();
 echo LoginFormService::displayLoginForm();

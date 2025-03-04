@@ -7,6 +7,8 @@ class NavBarService
         $output = '<nav class="flex justify-between items-center py-5 px-4 mb-10 border-b border-solid">';
         $output .= '<a href="index.php"><h1 class="text-5xl">Blog</h1></a>';
         $output .= '<div class="flex gap-5">';
+
+        // Display only if logged in
         $output .= '<a href="addPost.php">Create Post</a>';
 
         if ($_SESSION['loggedIn'] === false) {

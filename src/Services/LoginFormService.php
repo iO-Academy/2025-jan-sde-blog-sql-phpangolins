@@ -15,6 +15,9 @@ class LoginFormService
         $output .= '<div class="mb-5">';
         $output .= '<label class="mb-3 block" for="password">Password:</label>';
         $output .= '<input name="password" class="w-full px-3 py-2 text-lg" type="password" id="password" />';
+//        if ($user->checkUser() === false){
+//            $output .= '<p>Username or password are incorrect</p>';
+//        }
         $output .= ' </div>';
         $output .= '<input name="submitted" class="px-3 py-2 mt-4 text-lg bg-indigo-400 hover:bg-indigo-700 hover:text-white transition inline-block rounded-sm" type="submit" value="Login" />';
         $output .= '</form>';

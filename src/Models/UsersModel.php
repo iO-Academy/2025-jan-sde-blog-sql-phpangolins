@@ -9,20 +9,15 @@ class UsersModel
         $this->db = $db;
     }
 
-    public function checkUser(): bool|array
+    public function checkUser($email, $password): bool|array
     {
-        if (isset($_POST['submitted'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $query = $this->db->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email AND `password` = :password;");
+        $query = $this->db->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email AND `password` = :password;");
 
-            if ($query->execute([':email' => $email, ':password' => $password])) {
-               return $query->fetch();
-            } else {
-                return false;
-            }
+        if ($query->execute([':email' => $email, ':password' => $password])) {
+           return $query->fetch();
+        } else {
+            return false;
         }
-        return false;
     }
 
 }
