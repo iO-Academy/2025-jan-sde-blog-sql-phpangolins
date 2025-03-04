@@ -22,16 +22,14 @@ class PostServices
 
 
 
-static public function displayHomepage(array $posts):string{
+    static public function displayHomepage(array $posts):string{
 
-    $outcome = "<section class='container lg:w-1/2 mx-auto flex flex-col gap-5'>";
+        $outcome = "<section class='container lg:w-1/2 mx-auto flex flex-col gap-5'>";
 
-     foreach ($posts as $post){
-         $outcome .= PostServices::displaySingleHomepage($post);
-     }
-
-    $outcome .= '</section>';
-     return $outcome;
-}
-
+         foreach ($posts as $post){
+             $outcome .= PostServices::displaySingleHomepage($post);
+         }
+        $outcome .= '</section>';
+         return $outcome;
+    }
 }

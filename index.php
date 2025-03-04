@@ -1,3 +1,12 @@
+<?php
+    declare(strict_types=1);
+    require_once 'src/entities/PostEntity.php';
+    require_once 'src/services/PostServices.php';
+    require_once 'src/models/PostsModel.php';
+    require_once 'src/services/DatabaseConnectionServices.php';
+    $db = DatabaseConnectionServices::connect();
+    $posts = new PostsModel($db);
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,21 +17,9 @@
     <title>Blog</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<?php
-
-require_once 'src/entities/PostEntity.php';
-require_once 'src/services/PostServices.php';
-require_once 'src/models/PostsModel.php';
-require_once 'src/services/DatabaseConnectionServices.php';
-
-$db = DatabaseConnectionServices::connect();
-
-$posts = new PostsModel($db);
-
-echo PostServices::displayHomepage($posts->getAll());
-
-?>
 <body>
-
+    <?php
+        echo PostServices::displayHomepage($posts->getAll());
+    ?>
 </body>
 </html>
