@@ -13,7 +13,7 @@ class AddPostsModel
 
     public function addPost($title, $content): bool
     {
-        $query = $this->db->prepare("INSERT INTO `posts` (`title`, `content`) VALUES (:title, :content);");
+        $query = $this->db->prepare("INSERT INTO `posts` (`title`, `content`, `date_time`) VALUES (:title, :content, NOW());");
         if ($query->execute([':title' => $title, ':content' => $content])) {
             return true;
         }

@@ -7,6 +7,12 @@ require_once 'src/Models/AddPostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
 require_once 'src/Services/AddPostsServices.php';
 
+session_start();
+
+if ($_SESSION['loggedIn'] === false) {
+    header('Location:login.php');
+}
+
 echo NavBarService::displayNavBar();
 
 $titleError = false;
