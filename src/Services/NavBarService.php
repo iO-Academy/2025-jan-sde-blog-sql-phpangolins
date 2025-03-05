@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 class NavBarService
 {
     static public function displayNavBar(): string
@@ -8,10 +9,10 @@ class NavBarService
         $output .= '<a href="index.php"><h1 class="text-5xl">Blog</h1></a>';
         $output .= '<div class="flex gap-5">';
 
-        if ($_SESSION['loggedIn'] === true) {
+        if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
             $output .= '<a href="addPost.php">Create Post</a>';
         }
-        if ($_SESSION['loggedIn'] === false) {
+        if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === false) {
             $output .= '<a href="login.php">Login</a>';
             $output .= '<a href="register.php">Register</a>';
         }
@@ -19,5 +20,4 @@ class NavBarService
             $output .= '</nav>';
             return $output;
     }
-
 }
