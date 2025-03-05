@@ -13,10 +13,10 @@ class UsersModel
         $this->db = $db;
     }
 
-    public function checkUser($email, $password): bool|array
+    public function checkUser($email, $password): bool|UserEntity
     {
         $query = $this->db->prepare("SELECT `id`,`username`, `email`, `password` FROM `users` WHERE `email` = :email AND `password` = :password;");
-        $query -> setFetchMode(PDO::FETCH_CLASS, UserEntity::class);
+        $query -> setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, UserEntity::class);
         if ($query->execute([':email' => $email, ':password' => $password])) {
            return $query->fetch();
         } else {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 class UserEntity
 {
-    public int $id;
-    public string $username;
-    public string $email;
-    public string $password;
+    private int $id;
+    private string $username;
+    private string $email;
+    private string $password;
 }
