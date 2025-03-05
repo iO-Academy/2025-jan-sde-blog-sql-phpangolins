@@ -6,11 +6,11 @@ require_once 'src/Services/NavBarService.php';
 
 session_start();
 
-$db = DatabaseConnectionServices::connect();
-$user = new UsersModel($db);
 $displayError = false;
 
 if (isset($_POST['submitted'])) {
+    $db = DatabaseConnectionServices::connect();
+    $user = new UsersModel($db);
     $email = $_POST['email'];
     $password = $_POST['password'];
 

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 class NavBarService
 {
     static public function displayNavBar(): string
@@ -16,8 +17,8 @@ class NavBarService
             $output .= '<a href="login.php">Login</a>';
             $output .= '<a href="register.php">Register</a>';
         }
-            $output .= '</div>';
-            $output .= '</nav>';
-            return $output;
+        $output .= '</div>';
+        $output .= '</nav>';
+        return $output;
     }
 }

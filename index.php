@@ -3,7 +3,6 @@
 session_start();
 
 require_once 'src/Services/NavBarService.php';
-echo NavBarService::displayNavBar();
 
 ?>
 
@@ -18,6 +17,10 @@ echo NavBarService::displayNavBar();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
+<?php
+echo NavBarService::displayNavBar();
+?>
 
 </body>
 </html>
