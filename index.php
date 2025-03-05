@@ -1,11 +1,14 @@
 <?php
-
-session_start();
-
-require_once 'src/Services/NavBarService.php';
-
+    declare(strict_types=1);
+    session_start();
+    require_once 'src/Services/NavBarService.php';
+    require_once 'src/Entities/PostEntity.php';
+    require_once 'src/Services/PostServices.php';
+    require_once 'src/Models/PostsModel.php';
+    require_once 'src/Services/DatabaseConnectionServices.php';
+    $db = DatabaseConnectionServices::connect();
+    $posts = new PostsModel($db);
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,10 +20,9 @@ require_once 'src/Services/NavBarService.php';
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-
-<?php
-echo NavBarService::displayNavBar();
-?>
-
+    <?php
+        echo PostServices::displayHomepage($posts->getAll());
+        echo NavBarService::displayNavBar();
+    ?>
 </body>
 </html>
