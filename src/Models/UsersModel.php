@@ -22,4 +22,45 @@ class UsersModel
         }
         return false;
     }
+
+    public function addUser(string $username, string $email, string $password): void
+    {
+        $query = $this->db->prepare("INSERT INTO `users` (`username`, `email`, `password`)
+        VALUES (:username, :email, :password);");
+        $query->execute([':username' => $username, ':email' => $email, ':password' => $password]);
+    }
+
+     public function registrationValidationCheckUsername(string $username): bool
+    {
+        $query = $this->db->prepare("SELECT `username` FROM `users` WHERE `username` = :username;");
+        $query->execute([':username' => $username]);
+        if ($query->fetch())
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public function registrationValidationCheckEmail(string $email): bool
+    {
+        $query = $this->db->prepare("SELECT `email` FROM `users` WHERE `email` = :email;");
+        $query->execute([':email' => $email]);
+        if ($query->fetch())
+        {
+            return false;
+        }
+        return true;
+    }
+
+//    public function registrationValidationCheck(string $username, string $email): bool
+//    {
+//        $query = $this->db->prepare("SELECT 1 FROM `users` WHERE `username` = :username OR `email` = :email LIMIT 1;");
+//        if ($query->execute([':username' => $username, ':email' => $email]))
+//        {
+//            return false;
+//        }
+//        return true;
+//    }
+
+
 }
