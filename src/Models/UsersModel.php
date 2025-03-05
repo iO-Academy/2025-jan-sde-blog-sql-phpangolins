@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once 'src/Entities/UserEntity.php';
+require_once 'src/Entities/UserEntity';
 
 class UsersModel
 {
