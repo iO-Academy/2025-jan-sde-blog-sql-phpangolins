@@ -6,9 +6,11 @@ require_once 'src/Services/PostServices.php';
 require_once 'src/Models/PostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
 require_once 'src/Services/CommentFormService.php';
+require_once 'src/Models/CommentsModel.php';
 
 $db = DatabaseConnectionServices::connect();
 $posts = new PostsModel($db);
+$commentsModel = new CommentsModel($db);
 
 if (isset($_GET['id'])) {
     $pageId = intval($_GET['id']);
@@ -16,37 +18,26 @@ if (isset($_GET['id'])) {
     throw new Exception('$_GET superglobal doesnt return any value -');
 }
 
-var_dump($_SESSION);
+$postToDisplay = $posts->singlePagePost($pageId);
+$pageTitle = $postToDisplay->getTitle();
 
 $successMessage = false;
 $errorMessage = false;
 
-
-// need to move this into its own function somwehere
-// maybe in a service??
-
 if(isset($_POST['comment_content'])) {
     // store content of comment form in variable
     $commentContent = $_POST['comment_content'];
-    var_dump($commentContent);
     // return a boolean depending on if comment meets validation requirements
     $commentValidation = CommentFormService::validateCommentContent($commentContent);
-    var_dump($commentValidation);
-
     if ($commentValidation) {
-        // assigning booleans for success message
-        $successMessage = true;
-        $errorMessage = false;
+        $successMessage = $commentsModel->insertCommentIntoTable($commentContent, $pageId, $_SESSION['user_id']);
     } else {
-        // assigning booleans for error message
         $errorMessage = true;
-        $successMessage = false;
     }
-
 }
 
-$postToDisplay = $posts->singlePagePost($pageId);
-$pageTitle = $postToDisplay->getTitle();
+
+
 ?>
 <!doctype html>
 <html lang="en">
