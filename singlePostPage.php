@@ -18,6 +18,9 @@ if (isset($_GET['id'])) {
 
 var_dump($_SESSION);
 
+$successMessage = false;
+$errorMessage = false;
+
 if(isset($_POST['comment_content'])) {
     // store content of comment form in variable
     $commentContent = $_POST['comment_content'];
@@ -27,9 +30,11 @@ if(isset($_POST['comment_content'])) {
     var_dump($commentValidation);
 
     if ($commentValidation) {
-
+        $successMessage = true;
+        $errorMessage = false;
     } else {
-
+        $errorMessage = true;
+        $successMessage = false;
     }
 
 }
@@ -51,8 +56,14 @@ $pageTitle = $postToDisplay->getTitle();
     <?php
         echo NavBarService::displayNavBar();
         echo PostServices::displaySinglePost($postToDisplay);
-        if($_SESSION['loggedIn']) {
+        if ($_SESSION['loggedIn']) {
             echo CommentFormService::displayForm();
+        }
+        if ($successMessage) {
+            echo CommentFormService::successMessage();
+        }
+        if ($errorMessage) {
+            echo CommentFormService::errorMessage();
         }
     ?>
 </body>
