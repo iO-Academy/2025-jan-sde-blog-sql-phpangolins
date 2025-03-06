@@ -45,4 +45,36 @@ class PostServicesTest extends TestCase{
          $this->assertStringContainsString('Title 1', $method);
          $this->assertStringContainsString('Title 2', $method);
     }
+
+    public function test_displaySinglePost_correctDisplay() : void
+    {
+        $post = new PostEntity(title: 'title', author: 'test', content: 'this is content', date_time: '2025-08-08 00:00:00');
+
+        $actual = PostServices::displaySinglePost($post);
+
+        $this->assertStringContainsString('title', $actual);
+        $this->assertStringContainsString('test', $actual);
+        $this->assertStringContainsString('this is content', $actual);
+        $this->assertStringContainsString('08/08/25', $actual);
+
+
+    }
+
+    public function test_displaySinglePost_correctATagAndHref() : void
+    {
+        $fakeEntity = $this->createMock(PostEntity::class);
+        $actual = PostServices::displaySinglePost($fakeEntity);
+
+        $this->assertStringContainsString('<a', $actual);
+        $this->assertStringContainsString('</a>', $actual);
+        $this->assertStringContainsString("href='index.php'", $actual);
+    }
+
+    public function test_displaySinglePost_anonymousAuthor() : void
+    {
+        $post = new PostEntity(author: '');
+        $actual = PostServices::displaySinglePost($post);
+
+        $this->assertStringContainsString('By Anonymous', $actual);
+    }
 }
