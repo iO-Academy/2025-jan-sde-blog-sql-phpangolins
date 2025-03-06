@@ -26,13 +26,13 @@ class UsersModel
         VALUES (:username, :email, :password);");
         $query->execute([':username' => $username, ':email' => $email, ':password' => $password]);
     }
-     public function checkUsernameExists(string $username): string | bool
+     public function checkUsernameExists(string $username): bool
     {
         $query = $this->db->prepare("SELECT `username` FROM `users` WHERE `username` = :username;");
         $query->execute([':username' => $username]);
         if ($query->fetch())
         {
-            return $username;
+            return true;
         }
         return false;
     }

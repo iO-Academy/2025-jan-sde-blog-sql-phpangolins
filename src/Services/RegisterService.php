@@ -25,7 +25,7 @@ class RegisterService
 
     static public function validatePassword(string $password): bool
     {
-        if (strlen($password) < 8 || strlen($password) > 25)
+        if (strlen($password) < 8 || strlen($password) > 50)
         {
             return false;
         }
