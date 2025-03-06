@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once 'src/Entities/CommentEntity.php';
 
 class CommentsModel
 {
@@ -18,5 +19,20 @@ class CommentsModel
             return true;
         }
         return false;
+    }
+
+    public function commentsThatBelongToPost(int $post_id) : array|false
+    {
+        $query = $this->db->prepare("SELECT `comments`.`comment`, `comments`.`date`, `users`.`username` 
+                                            FROM `comments`
+                                            JOIN `users`
+                                                ON `comments`.`user_id` = `users`.`id`
+                                            WHERE `comments`.`post_id` = :post_id;");
+        $query->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class);
+        if ($query->execute(['post_id' => $post_id])) {
+            return $query->fetchAll();
+        }
+        return false;
+
     }
 }
