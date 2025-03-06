@@ -16,8 +16,22 @@ if (isset($_GET['id'])) {
     throw new Exception('$_GET superglobal doesnt return any value -');
 }
 
+var_dump($_SESSION);
+
 if(isset($_POST['comment_content'])) {
-    var_dump($_POST['comment_content']);
+    // store content of comment form in variable
+    $commentContent = $_POST['comment_content'];
+    var_dump($commentContent);
+    // return a boolean depending on if comment meets validation requirements
+    $commentValidation = CommentFormService::validateCommentContent($commentContent);
+    var_dump($commentValidation);
+
+    if ($commentValidation) {
+
+    } else {
+
+    }
+
 }
 
 $postToDisplay = $posts->singlePagePost($pageId);
@@ -37,7 +51,9 @@ $pageTitle = $postToDisplay->getTitle();
     <?php
         echo NavBarService::displayNavBar();
         echo PostServices::displaySinglePost($postToDisplay);
-        echo CommentFormService::displayForm();
+        if($_SESSION['loggedIn']) {
+            echo CommentFormService::displayForm();
+        }
     ?>
 </body>
 </html>
