@@ -20,4 +20,3 @@ class AddPostsServices
         return true;
     }
 }
-
