@@ -18,7 +18,7 @@ if (isset($_POST['submitted'])) {
     if ($userDetails !== false) {
         $displayError = false;
         $_SESSION['loggedIn'] = true;
-        $_SESSION['user_id'] = $userDetails['id'];
+        $_SESSION['user_id'] = $userDetails->getId();
         header('Location:index.php');
     }
     $displayError = true;
