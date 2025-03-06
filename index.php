@@ -10,7 +10,10 @@
     $posts = new PostsModel($db);
 
     echo '<pre>';
-    var_dump($posts->singlePagePost(2))
+    var_dump($posts->singlePagePost(2));
+    echo '</pre>';
+
+    echo PostServices::displaySinglePost($posts->singlePagePost(2));
 ?>
 <!doctype html>
 <html lang="en">
