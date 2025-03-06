@@ -21,7 +21,6 @@ if (isset($_POST['submitted'])) {
     }
     $displayError = true;
 }
-
 echo NavBarService::displayNavBar();
 ?>
 
