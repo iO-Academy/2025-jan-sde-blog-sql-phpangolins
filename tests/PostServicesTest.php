@@ -29,7 +29,8 @@ class PostServicesTest extends TestCase{
         $this->assertStringContainsString('08/08/25', $method);
        }
 
-       public function testDisplayHomepage(){
+    public function testDisplayHomepage()
+    {
         $post1 =new PostEntity(
             title: 'Title 1',
         );
@@ -43,5 +44,5 @@ class PostServicesTest extends TestCase{
 
          $this->assertStringContainsString('Title 1', $method);
          $this->assertStringContainsString('Title 2', $method);
-       }
+    }
 }
