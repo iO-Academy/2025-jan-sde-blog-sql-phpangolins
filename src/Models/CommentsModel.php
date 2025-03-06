@@ -29,7 +29,7 @@ class CommentsModel
                                                 ON `comments`.`user_id` = `users`.`id`
                                             WHERE `comments`.`post_id` = :post_id
                                             ORDER BY `comments`.`date` DESC;");
-        $query->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class);
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, CommentEntity::class);
         if ($query->execute(['post_id' => $post_id])) {
             return $query->fetchAll();
         }
