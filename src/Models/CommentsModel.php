@@ -27,7 +27,8 @@ class CommentsModel
                                             FROM `comments`
                                             JOIN `users`
                                                 ON `comments`.`user_id` = `users`.`id`
-                                            WHERE `comments`.`post_id` = :post_id;");
+                                            WHERE `comments`.`post_id` = :post_id
+                                            ORDER BY `comments`.`date` DESC;");
         $query->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class);
         if ($query->execute(['post_id' => $post_id])) {
             return $query->fetchAll();
