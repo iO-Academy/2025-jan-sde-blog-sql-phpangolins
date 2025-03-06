@@ -25,7 +25,7 @@ class PostsModel{
         return false;
     }
 
-    public function singlePagePost(int $id): PostEntity
+    public function singlePagePost(int $id): PostEntity|false
     {
         $query = $this->db->prepare('SELECT `posts`.`title`, `users`.`username` AS "author", `posts`.`date_time`, `posts`.`content`
                                             FROM `posts`
@@ -33,8 +33,10 @@ class PostsModel{
                                             ON `posts` . `user_id` = `users` . `id`
                                             WHERE `posts`.`id` = :id;');
         $query -> setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, PostEntity::class);
-        $query->execute([':id'=>$id]);
-        return $query->fetch();
+        if ($query->execute([':id'=>$id])) {
+            return $query->fetch();
+        }
+        return false;
     }
 
 }
