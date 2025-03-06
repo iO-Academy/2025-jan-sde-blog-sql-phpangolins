@@ -11,7 +11,9 @@ class NavBarService
         $output .= '<div class="flex gap-5">';
 
         if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
+            $output .= "<p class='font-bold'>Logged in</p>";
             $output .= '<a href="addPost.php">Create Post</a>';
+            $output .= '<a href="logout.php">Log Out</a>';
         }
         if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === false) {
             $output .= '<a href="login.php">Login</a>';
