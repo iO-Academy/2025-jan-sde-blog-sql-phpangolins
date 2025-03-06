@@ -1,26 +1,18 @@
 <?php
 declare(strict_types=1);
-
 session_start();
 require_once 'src/Services/NavBarService.php';
-//    require_once 'src/Entities/PostEntity.php';
 require_once 'src/Services/PostServices.php';
 require_once 'src/Models/PostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
+
 $db = DatabaseConnectionServices::connect();
 $posts = new PostsModel($db);
+
 $pageId = intval($_GET['id']);
-
-echo '<pre>';
-var_dump($posts->singlePagePost($pageId));
-echo '</pre>';
-
-echo PostServices::displaySinglePost($posts->singlePagePost($pageId));
-
-
-
+$postToDisplay = $posts->singlePagePost($pageId);
+$pageTitle = $postToDisplay->getTitle();
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,9 +21,12 @@ echo PostServices::displaySinglePost($posts->singlePagePost($pageId));
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title><?php echo $pageTitle ?></title>
 </head>
 <body>
-
+    <?php
+        echo NavBarService::displayNavBar();
+        echo PostServices::displaySinglePost($postToDisplay);
+    ?>
 </body>
 </html>
