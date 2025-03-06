@@ -27,6 +27,16 @@ class CommentFormService
         }
         return false;
     }
+
+    static public function successMessage() : string
+    {
+        return '<p class="text-center text-green-800">Your comment has been posted successfully.</p>';
+    }
+
+    static public function errorMessage() : string
+    {
+        return '<p class="text-center text-red-500">Your comment could not be posted.</p>';
+    }
 }
 
 
