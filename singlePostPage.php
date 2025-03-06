@@ -21,6 +21,10 @@ var_dump($_SESSION);
 $successMessage = false;
 $errorMessage = false;
 
+
+// need to move this into its own function somwehere
+// maybe in a service??
+
 if(isset($_POST['comment_content'])) {
     // store content of comment form in variable
     $commentContent = $_POST['comment_content'];
@@ -30,9 +34,11 @@ if(isset($_POST['comment_content'])) {
     var_dump($commentValidation);
 
     if ($commentValidation) {
+        // assigning booleans for success message
         $successMessage = true;
         $errorMessage = false;
     } else {
+        // assigning booleans for error message
         $errorMessage = true;
         $successMessage = false;
     }
