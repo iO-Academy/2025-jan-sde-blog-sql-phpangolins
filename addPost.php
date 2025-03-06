@@ -13,8 +13,6 @@ if (!isset($_SESSION['loggedIn']) || ($_SESSION['loggedIn'] === false)) {
     header('Location:login.php');
 }
 
-echo NavBarService::displayNavBar();
-
 $titleError = false;
 $contentError = false;
 $successMessage = false;
@@ -46,8 +44,9 @@ if (isset($_POST['submitted'])) {
     }
 }
 
-?>
+echo NavBarService::displayNavBar();
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,11 +74,11 @@ if (isset($_POST['submitted'])) {
         <div class="w-full sm:w-1/3">
             <label for="category" class="mb-3 block">Category:</label>
             <select class="w-full px-3 py-[10.5px] text-lg bg-white" id="category">
-<!--                <option>News</option>-->
-<!--                <option>Gaming</option>-->
-<!--                <option>Films</option>-->
-<!--                <option>TV</option>-->
-<!--                <option>Science and Nature</option>-->
+                <option>News</option>
+                <option>Gaming</option>
+                <option>Films</option>
+                <option>TV</option>
+                <option>Science and Nature</option>
             </select>
         </div>
     </div>
