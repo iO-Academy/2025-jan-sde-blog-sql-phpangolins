@@ -9,7 +9,12 @@ require_once 'src/Services/DatabaseConnectionServices.php';
 $db = DatabaseConnectionServices::connect();
 $posts = new PostsModel($db);
 
-$pageId = intval($_GET['id']);
+if (isset($_GET['id'])) {
+    $pageId = intval($_GET['id']);
+} else {
+    throw new Exception('$_GET superglobal doesnt return any value -');
+}
+
 $postToDisplay = $posts->singlePagePost($pageId);
 $pageTitle = $postToDisplay->getTitle();
 ?>
