@@ -40,6 +40,7 @@ class PostServices
         $outcome .= "<article class='p-8 border border-solid rounded-md'>";
         $outcome .= "<div class='flex justify-between items-center flex-col md:flex-row mb-4'>";
         $outcome .= "<h2 class='text-4xl'>" . $post->getTitle() . "</h2>";
+        $outcome .= "<span class='text-xl'>" . $post->getLikes() . ' likes - ' . $post->getDislikes() . " dislikes</span>";
         $outcome .= "</div>";
         $outcome .= "<p class='text-2xl mb-10'>" . date_format($date,"d/m/y");
 
