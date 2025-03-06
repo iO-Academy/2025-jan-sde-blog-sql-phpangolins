@@ -35,7 +35,7 @@ class CommentFormService
 
     static public function errorMessage() : string
     {
-        return '<p class="text-center text-red-500">Your comment could not be posted.</p>';
+        return '<p class="text-center text-red-500">Your comment could not be posted. <br /> Your comment was under 10 characters or over 200 characters</p>';
     }
 }
 
