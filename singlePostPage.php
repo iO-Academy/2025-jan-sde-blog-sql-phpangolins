@@ -53,7 +53,7 @@ if(isset($_POST['comment_content'])) {
     <?php
         echo NavBarService::displayNavBar();
         echo PostServices::displaySinglePost($postToDisplay);
-        if ($_SESSION['loggedIn']) {
+        if (isset($_SESSION['loggedIn'])) {
             echo CommentFormService::displayForm();
         }
         if ($successMessage) {
