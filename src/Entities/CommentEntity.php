@@ -9,6 +9,23 @@ class CommentEntity
     private string $username;
     private string $date;
 
+    /**
+     * @param int $id
+     * @param string $comment
+     * @param int $post_id
+     * @param string $username
+     * @param string $date
+     */
+    public function __construct(int $id = 0, string $comment = '', int $post_id = 0, string $username = '', string $date = '')
+    {
+        $this->id = $id;
+        $this->comment = $comment;
+        $this->post_id = $post_id;
+        $this->username = $username;
+        $this->date = $date;
+    }
+
+
     public function getId(): int
     {
         return $this->id;
@@ -33,7 +50,4 @@ class CommentEntity
     {
         return $this->date;
     }
-
-
-
 }
