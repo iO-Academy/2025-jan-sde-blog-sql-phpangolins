@@ -64,6 +64,8 @@ if(isset($_POST['comment_content'])) {
         }
 
         $commentsArray = $commentsModel->commentsThatBelongToPost($pageId);
+        echo "<pre>";
+        var_dump($commentsArray);
         echo DisplayCommentsService::displayAll($commentsArray);
 
     ?>
