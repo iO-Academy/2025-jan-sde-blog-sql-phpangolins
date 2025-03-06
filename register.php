@@ -47,7 +47,7 @@ if (isset($_POST['submitted'])) {
             <label class="mb-3 block" for="username">Username:</label>
             <input class="w-full px-3 py-2 text-lg" type="text" id="username" name="username" />
             <?php
-                if (isset($_POST['submitted']) && $user->registrationValidationCheckUsername($username) === false){
+                if (isset($_POST['submitted']) && $user->checkUsernameExists($username) === false){
                     echo "<p class='text-red-600'>Username already taken</p>";
                 }
                 if (isset($_POST['submitted']) && RegisterService::validateUsername($username) ===false){
@@ -59,10 +59,10 @@ if (isset($_POST['submitted'])) {
             <label class="mb-3 block" for="email">Email:</label>
             <input class="w-full px-3 py-2 text-lg" type="text" id="email" name="email" />
             <?php
-            if (isset($_POST['submitted']) && RegisterService::validateEmail($email) === false){
+            if (isset($_POST['submitted']) && RegisterService::validateEmail($email) === true){
                 echo "<p class='text-red-600'>Must be a valid email</p>";
             }
-            if (isset($_POST['submitted']) && $user->registrationValidationCheckEmail($email) ===false){
+            if (isset($_POST['submitted']) && $user->checkEmailExists($email) ===true){
                 echo "<p class='text-red-600'>Email is already registered</p>";
             }
             ?>

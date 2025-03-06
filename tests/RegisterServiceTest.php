@@ -42,7 +42,7 @@ class RegisterServiceTest extends TestCase{
         $this->assertFalse($actual);
     }
     public function testInvalidPasswordGreaterThan(){
-        $password = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeee';
+        $password = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
         $actual = RegisterService::validatePassword($password);
         $this->assertFalse($actual);
     }
