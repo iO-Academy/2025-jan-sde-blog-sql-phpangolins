@@ -16,6 +16,10 @@ if (isset($_GET['id'])) {
     throw new Exception('$_GET superglobal doesnt return any value -');
 }
 
+if(isset($_POST['comment_content'])) {
+    var_dump($_POST['comment_content']);
+}
+
 $postToDisplay = $posts->singlePagePost($pageId);
 $pageTitle = $postToDisplay->getTitle();
 ?>
