@@ -65,7 +65,7 @@ echo NavBarService::displayNavBar();
             <input name="title" class="w-full px-3 py-2 text-lg" type="text" id="title" />
             <?php
             if ($titleError === true) {
-                echo 'Title is too long! 30 characters max';
+                echo '<p class="text-center text-red-500">Title is too long! 30 characters max</p>';
             }
             ?>
         </div>
@@ -85,14 +85,14 @@ echo NavBarService::displayNavBar();
         <textarea name="content" class="w-full" id="content" rows="9"></textarea>
         <?php
         if ($contentError === true) {
-            echo 'Content must be between 50 and 1000 characters!';
+            echo '<p class="text-center text-red-500">Content must be between 50 and 1000 characters!</p>';
         }
         ?>
     </div>
     <input class="px-3 py-2 mt-4 text-lg bg-indigo-400 hover:bg-indigo-700 hover:text-white transition inline-block rounded-sm" name="submitted" type="submit" value="Create Post" />
     <?php
     if ($successMessage === true) {
-        echo 'New post added!';
+        echo '<p class="text-center text-green-800">New post added!</p>';
     }
     ?>
 </form>
