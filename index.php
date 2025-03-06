@@ -8,6 +8,9 @@
     require_once 'src/Services/DatabaseConnectionServices.php';
     $db = DatabaseConnectionServices::connect();
     $posts = new PostsModel($db);
+
+    echo '<pre>';
+    var_dump($posts->singlePagePost(2))
 ?>
 <!doctype html>
 <html lang="en">
