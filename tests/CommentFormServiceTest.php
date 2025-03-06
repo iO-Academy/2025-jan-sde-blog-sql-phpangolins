@@ -38,4 +38,25 @@ class CommentFormServiceTest extends TestCase
         $actual = CommentFormService::validateCommentContent($input);
         $this->assertFalse($actual);
     }
+
+    public function test_validateCommentContent_over200chars() : void
+    {
+        $input = 'A shimmering dragonfly, perched on a dew-kissed fern, 
+        watched a ladybug tumble down a vibrant poppy. Distant train whistles echoed, 
+        a lonely symphony against the rustling leaves and the gentle murmur of a hidden stream.';
+        $actual = CommentFormService::validateCommentContent($input);
+        $this->assertFalse($actual);
+    }
+
+    public function test_successMessage_correctMessage() : void
+    {
+        $actual = CommentFormService::successMessage();
+        $this->assertStringContainsString('Your comment has been posted successfully.', $actual);
+    }
+
+    public function test_errorMessage_correctMessage() : void
+    {
+        $actual = CommentFormService::errorMessage();
+        $this->assertStringContainsString('Your comment could not be posted. <br /> Your comment was under 10 characters or over 200 characters', $actual);
+    }
 }
