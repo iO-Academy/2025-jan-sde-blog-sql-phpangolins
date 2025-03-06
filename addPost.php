@@ -9,7 +9,7 @@ require_once 'src/Services/AddPostsServices.php';
 
 session_start();
 
-if ($_SESSION['loggedIn'] === false) {
+if (!isset($_SESSION['loggedIn']) || ($_SESSION['loggedIn'] === false)) {
     header('Location:login.php');
 }
 
@@ -19,8 +19,6 @@ $titleError = false;
 $contentError = false;
 
 if (isset($_POST['submitted'])) {
-    $db = DatabaseConnectionServices::connect();
-    $addPost = new AddPostsModel($db);
     $title = $_POST['title'];
     $content = $_POST['content'];
 
@@ -28,12 +26,19 @@ if (isset($_POST['submitted'])) {
     $contentLength = strlen($content);
 
     $validTitle = AddPostsServices::validTitle($titleLength);
-    $validContent = AddPostsServices::validContent($titleLength);
+    $validContent = AddPostsServices::validContent($contentLength);
 
     if ($validTitle === true && $validContent === true) {
+        $db = DatabaseConnectionServices::connect();
+        $addPost = new AddPostsModel($db);
         $addPost->addPost($title, $content);
-    } else {
+    }
+
+    if ($validTitle === false) {
         $titleError = true;
+    }
+
+    if ($validContent === false) {
         $contentError = true;
     }
 }

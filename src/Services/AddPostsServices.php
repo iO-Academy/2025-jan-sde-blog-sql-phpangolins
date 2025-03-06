@@ -14,7 +14,7 @@ class AddPostsServices
 
     static public function validContent($contentLength): bool
     {
-        if ($contentLength > 1001 || $contentLength < 50) {
+        if ($contentLength < 50 || $contentLength > 1001) {
             return false;
         }
         return true;
