@@ -34,4 +34,7 @@ class NavBarServiceTest extends TestCase
 
         $this->assertStringContainsString('Login', $actual);
     }
+
+
 }
+
