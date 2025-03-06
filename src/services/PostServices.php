@@ -13,6 +13,7 @@ class PostServices
         $outcome .= "<p class='text-2xl mb-2'>".date_format($date,"d/m/y")." - By ".$post->getAuthor()."</p>";
         $outcome .= "<p>".substr($post->getContent(), 0, 100)."</p>";
         $outcome .= '<div class="flex justify-center">';
+        $outcome .= '<a class="px-3 py-2 mt-4 text-lg bg-indigo-400 hover:bg-indigo-700 hover:text-white transition inline-block rounded-sm" href="singlePostPage.php?id=' . $post->getId() . '">View Post</a>';
         $outcome .= '</div>';
         $outcome .= '</article>';
 
