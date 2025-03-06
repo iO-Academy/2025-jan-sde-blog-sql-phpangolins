@@ -17,10 +17,12 @@ echo NavBarService::displayNavBar();
 
 $titleError = false;
 $contentError = false;
+$successMessage = false;
 
 if (isset($_POST['submitted'])) {
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $userID = $_SESSION['user_id'];
 
     $titleLength = strlen($title);
     $contentLength = strlen($content);
@@ -31,7 +33,8 @@ if (isset($_POST['submitted'])) {
     if ($validTitle === true && $validContent === true) {
         $db = DatabaseConnectionServices::connect();
         $addPost = new AddPostsModel($db);
-        $addPost->addPost($title, $content);
+        $addPost->addPost($title, $content, $userID);
+        $successMessage = true;
     }
 
     if ($validTitle === false) {
@@ -85,15 +88,18 @@ if (isset($_POST['submitted'])) {
         <label class="mb-3 block" for="content">Content:</label>
         <textarea name="content" class="w-full" id="content" rows="9"></textarea>
         <?php
-
         if ($contentError === true) {
             echo 'Content must be between 50 and 1000 characters!';
         }
-
         ?>
     </div>
 
     <input class="px-3 py-2 mt-4 text-lg bg-indigo-400 hover:bg-indigo-700 hover:text-white transition inline-block rounded-sm" name="submitted" type="submit" value="Create Post" />
+    <?php
+    if ($successMessage === true) {
+        echo 'New post added!';
+    }
+    ?>
 </form>
 
 </body>
