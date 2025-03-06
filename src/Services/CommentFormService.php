@@ -22,7 +22,7 @@ class CommentFormService
 
     static public function validateCommentContent(string $commentContent) : bool
     {
-        if (strlen($commentContent) >= 10 && strlen($commentContent) <= 100) {
+        if (strlen($commentContent) >= 10 && strlen($commentContent) <= 200) {
             return true;
         }
         return false;
