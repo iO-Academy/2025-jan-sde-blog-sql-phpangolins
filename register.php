@@ -18,8 +18,8 @@ if (isset($_POST['submitted'])) {
         RegisterService::validateUsername($username)
         && RegisterService::validateEmail($email)
         && RegisterService::validatePassword($password)
-        && $user->registrationValidationCheckUsername($username)
-        && $user->registrationValidationCheckEmail($email)) {
+        && !$user->checkUsernameExists($username)
+        && !$user->checkEmailExists($email)) {
             $user->addUser($username, $email, $password);
             $_SESSION ['loggedIn'] = true;
             $_SESSION ['username'] = $username;

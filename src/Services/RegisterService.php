@@ -15,10 +15,7 @@ class RegisterService
 
     static public function validateEmail(string $email): bool
     {
-        if (!str_contains($email, '@')
-            || !(str_ends_with($email, '.com')
-            || str_ends_with($email, '.co.uk'))
-            || str_starts_with($email, '@'))
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             return false;
         }
@@ -28,7 +25,7 @@ class RegisterService
 
     static public function validatePassword(string $password): bool
     {
-        if (strlen($password) < 8 || str_contains($password, 'password'))
+        if (strlen($password) < 8 || strlen($password) > 25)
         {
             return false;
         }

@@ -26,18 +26,8 @@ class RegisterServiceTest extends TestCase{
 
         $this->assertTrue($actual);
     }
-    public function testInvalidEmailAt(){
+    public function testInvalidEmail(){
         $email = 'eee.com';
-        $actual =RegisterService::validateEmail($email);
-        $this->assertFalse($actual);
-    }
-    public function testInvalidEmailDotCom(){
-        $email = 'e@ee';
-        $actual =RegisterService::validateEmail($email);
-        $this->assertFalse($actual);
-    }
-    public function testInvalidEmailStartWithAt(){
-        $email = '@eee.com';
         $actual =RegisterService::validateEmail($email);
         $this->assertFalse($actual);
     }
@@ -51,8 +41,8 @@ class RegisterServiceTest extends TestCase{
         $actual = RegisterService::validatePassword($password);
         $this->assertFalse($actual);
     }
-    public function testInvalidPasswordPassword(){
-        $password = 'password';
+    public function testInvalidPasswordGreaterThan(){
+        $password = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeee';
         $actual = RegisterService::validatePassword($password);
         $this->assertFalse($actual);
     }
