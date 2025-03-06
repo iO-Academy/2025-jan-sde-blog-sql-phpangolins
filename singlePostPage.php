@@ -7,6 +7,7 @@ require_once 'src/Models/PostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
 require_once 'src/Services/CommentFormService.php';
 require_once 'src/Models/CommentsModel.php';
+require_once 'src/Services/DisplayCommentsService.php';
 
 $db = DatabaseConnectionServices::connect();
 $posts = new PostsModel($db);
@@ -37,7 +38,6 @@ if(isset($_POST['comment_content'])) {
 }
 
 
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -62,6 +62,10 @@ if(isset($_POST['comment_content'])) {
         if ($errorMessage) {
             echo CommentFormService::errorMessage();
         }
+
+        $commentsArray = $commentsModel->commentsThatBelongToPost($pageId);
+        echo DisplayCommentsService::displayAll($commentsArray);
+
     ?>
 </body>
 </html>
