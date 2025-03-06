@@ -5,6 +5,7 @@ require_once 'src/Services/NavBarService.php';
 require_once 'src/Services/PostServices.php';
 require_once 'src/Models/PostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
+require_once 'src/Services/CommentFormService.php';
 
 $db = DatabaseConnectionServices::connect();
 $posts = new PostsModel($db);
@@ -32,6 +33,7 @@ $pageTitle = $postToDisplay->getTitle();
     <?php
         echo NavBarService::displayNavBar();
         echo PostServices::displaySinglePost($postToDisplay);
+        echo CommentFormService::displayForm();
     ?>
 </body>
 </html>
