@@ -80,6 +80,4 @@ class PostEntity{
     {
         return $this->title;
     }
-
-
 }

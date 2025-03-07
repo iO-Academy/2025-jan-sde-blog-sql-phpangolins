@@ -8,7 +8,6 @@
     $db = DatabaseConnectionServices::connect();
     $posts = new PostsModel($db);
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,8 +20,8 @@
 </head>
 <body>
     <?php
-    echo NavBarService::displayNavBar();
-    echo PostServices::displayHomepage($posts->getAll());
+        echo NavBarService::displayNavBar();
+        echo PostServices::displayHomepage($posts->getAll());
     ?>
 </body>
 </html>
