@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+require_once 'src/Services/DatabaseConnectionServices.php';
+require_once 'src/Models/LikesDislikesModel.php';
+
 class LikesDislikesService
 {
     static public function displayButtons(bool $loggedIn) : string
@@ -16,5 +19,12 @@ class LikesDislikesService
         }
 
         return $output;
+    }
+
+    static public function addLike(LikeDislikeEntity $likeDislikeEntity, PostsModel $model) : void
+    {
+        // 0 represents false - run like
+        if ($likeDislikeEntity->getHasLiked() == 0){
+        }
     }
 }

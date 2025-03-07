@@ -47,4 +47,10 @@ class PostsModel{
         }
         return false;
     }
+
+    public function addLike(int $postId) : void
+    {
+        $query = $this->db->prepare("UPDATE `posts` SET `likes` = `likes` + 1 WHERE `id` = :postId;");
+        $query->execute([':postId'=>$postId]);
+    }
 }
