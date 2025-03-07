@@ -29,7 +29,8 @@ class PostServicesTest extends TestCase{
         $this->assertStringContainsString('08/08/25', $method);
        }
 
-       public function testDisplayHomepage(){
+    public function testDisplayHomepage()
+    {
         $post1 =new PostEntity(
             title: 'Title 1',
         );
@@ -43,59 +44,35 @@ class PostServicesTest extends TestCase{
 
          $this->assertStringContainsString('Title 1', $method);
          $this->assertStringContainsString('Title 2', $method);
-       }
-
-    public function test_validTitle_lengthUnder30(): void
-    {
-        $title = 'titleLength';
-        $titleLength = strlen($title);
-        $actual = PostServices::validTitle($titleLength);
-
-        $this ->assertTrue($actual);
     }
 
-    public function test_validTitle_lengthOver30(): void
+    public function test_displaySinglePost_correctDisplay() : void
     {
-        $title = 'titleLengthIsThisTextGoingToBeOver30WhoKnows';
-        $titleLength = strlen($title);
-        $actual = PostServices::validTitle($titleLength);
+        $post = new PostEntity(title: 'title', author: 'test', content: 'this is content', date_time: '2025-08-08 00:00:00');
 
-        $this ->assertFalse($actual);
+        $actual = PostServices::displaySinglePost($post);
+
+        $this->assertStringContainsString('title', $actual);
+        $this->assertStringContainsString('test', $actual);
+        $this->assertStringContainsString('this is content', $actual);
+        $this->assertStringContainsString('08/08/25', $actual);
     }
 
-    public function test_validContent_lengthUnder50(): void
+    public function test_displaySinglePost_correctATagAndHref() : void
     {
-        $content = 'contentLength';
-        $contentLength = strlen($content);
-        $actual = PostServices::validContent($contentLength);
+        $fakeEntity = $this->createMock(PostEntity::class);
+        $actual = PostServices::displaySinglePost($fakeEntity);
 
-        $this ->assertFalse($actual);
+        $this->assertStringContainsString('<a', $actual);
+        $this->assertStringContainsString('</a>', $actual);
+        $this->assertStringContainsString("href='index.php'", $actual);
     }
 
-    public function test_validContent_lengthOver1001(): void
+    public function test_displaySinglePost_anonymousAuthor() : void
     {
-        $content = 'ContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPants';
-        $contentLength = strlen($content);
-        $actual = PostServices::validContent($contentLength);
+        $post = new PostEntity(author: '');
+        $actual = PostServices::displaySinglePost($post);
 
-        $this ->assertFalse($actual);
-    }
-
-    public function test_validContent_lengthOver50(): void
-    {
-        $content = 'ContentLengthContentLengthContentLengthContentLengthContentLengthContentLength';
-        $contentLength = strlen($content);
-        $actual = PostServices::validContent($contentLength);
-
-        $this ->assertTrue($actual);
-    }
-
-    public function test_validContent_lengthUnder1001(): void
-    {
-        $content = 'ContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPantsContentLengthIsGoingToBeTheLongestLineYouHaveEverSeenEverInYourWholeEntireLifeHoldOntoYourHatsAndYourPants';
-        $contentLength = strlen($content);
-        $actual = PostServices::validContent($contentLength);
-
-        $this ->assertTrue($actual);
+        $this->assertStringContainsString('By Anonymous', $actual);
     }
 }
