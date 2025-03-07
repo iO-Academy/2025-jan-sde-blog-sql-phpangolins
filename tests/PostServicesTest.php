@@ -56,8 +56,6 @@ class PostServicesTest extends TestCase{
         $this->assertStringContainsString('test', $actual);
         $this->assertStringContainsString('this is content', $actual);
         $this->assertStringContainsString('08/08/25', $actual);
-
-
     }
 
     public function test_displaySinglePost_correctATagAndHref() : void
