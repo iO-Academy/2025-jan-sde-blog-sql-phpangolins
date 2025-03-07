@@ -57,10 +57,10 @@ if(isset($_POST['comment_content'])) {
             echo CommentFormService::displayForm();
         }
         if ($showSuccessMessage) {
-            echo CommentFormService::successMessage();
+            echo CommentFormService::SUCCESS;
         }
         if ($showErrorMessage) {
-            echo CommentFormService::errorMessage();
+            echo CommentFormService::ERROR;
         }
 
         $commentsArray = $commentsModel->commentsThatBelongToPost($pageId);

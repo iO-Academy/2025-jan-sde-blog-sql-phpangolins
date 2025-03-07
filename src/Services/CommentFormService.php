@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 class CommentFormService
 {
+    public const SUCCESS = '<p class="text-center text-green-800">Your comment has been posted successfully.</p>';
+    public const ERROR = '<p class="text-center text-red-500">Your comment could not be posted. <br /> Your comment was under 10 characters or over 200 characters</p>';
     static public function displayForm() : string
     {
 
@@ -26,15 +28,5 @@ class CommentFormService
             return true;
         }
         return false;
-    }
-
-    static public function successMessage() : string
-    {
-        return '<p class="text-center text-green-800">Your comment has been posted successfully.</p>';
-    }
-
-    static public function errorMessage() : string
-    {
-        return '<p class="text-center text-red-500">Your comment could not be posted. <br /> Your comment was under 10 characters or over 200 characters</p>';
     }
 }
