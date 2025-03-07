@@ -30,7 +30,7 @@ class PostsModel{
         $query = $this->db->prepare('SELECT `posts`.`title`, `users`.`username` AS "author", `posts`.`date_time`, `posts`.`content`
                                             FROM `posts`
                                             JOIN `users`
-                                            ON `posts` . `user_id` = `users` . `id`
+                                            ON `posts`.`user_id` = `users`.`id`
                                             WHERE `posts`.`id` = :id;');
         $query -> setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, PostEntity::class);
         if ($query->execute([':id'=>$id])) {
