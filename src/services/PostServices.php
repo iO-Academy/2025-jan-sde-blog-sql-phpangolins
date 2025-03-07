@@ -52,8 +52,6 @@ class PostServices
 
     static public function displaySinglePost(PostEntity $post): string
     {
-        var_dump($post->getDislikes());
-        var_dump($post->getLikes());
         $date = date_create($post->getDateTime());
 
         $outcome = "<section class='container md:w-1/2 mx-auto'>";

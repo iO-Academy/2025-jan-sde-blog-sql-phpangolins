@@ -8,7 +8,6 @@
     require_once 'src/Services/DatabaseConnectionServices.php';
     $db = DatabaseConnectionServices::connect();
     $posts = new PostsModel($db);
-    var_dump($_SESSION);
 ?>
 <!doctype html>
 <html lang="en">

@@ -13,8 +13,6 @@ $db = DatabaseConnectionServices::connect();
 $posts = new PostsModel($db);
 $commentsModel = new CommentsModel($db);
 
-var_dump($_SESSION);
-
 $_SESSION['post_id'] = $_GET['id'];
 
 if (isset($_GET['id'])) {
