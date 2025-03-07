@@ -2,7 +2,6 @@
     declare(strict_types=1);
     session_start();
     require_once 'src/Services/NavBarService.php';
-//    require_once 'src/Entities/PostEntity.php';
     require_once 'src/Services/PostServices.php';
     require_once 'src/Models/PostsModel.php';
     require_once 'src/Services/DatabaseConnectionServices.php';
