@@ -8,6 +8,11 @@
     require_once 'src/Services/DatabaseConnectionServices.php';
     $db = DatabaseConnectionServices::connect();
     $posts = new PostsModel($db);
+
+    if (!isset($_SESSION['loggedIn'])){
+        $_SESSION['loggedIn'] = false;
+    }
+
 ?>
 <!doctype html>
 <html lang="en">
