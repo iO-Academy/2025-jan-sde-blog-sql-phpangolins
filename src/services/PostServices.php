@@ -19,7 +19,6 @@ class PostServices
 
         return $outcome;
     }
-
     static public function displayHomepage(array $posts): string
     {
 
@@ -30,6 +29,23 @@ class PostServices
          }
         $outcome .= '</section>';
          return $outcome;
+    }
+
+
+    static public function validTitle($titleLength): bool
+    {
+        if ($titleLength > 30) {
+            return false;
+        }
+        return true;
+    }
+
+    static public function validContent($contentLength): bool
+    {
+        if ($contentLength < 50 || $contentLength > 1001) {
+            return false;
+        }
+        return true;
     }
 
     static public function displaySinglePost(PostEntity $post): string
@@ -56,4 +72,5 @@ class PostServices
         return $outcome;
     }
 }
+
 

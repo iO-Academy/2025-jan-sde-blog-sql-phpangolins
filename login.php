@@ -13,10 +13,12 @@ if (isset($_POST['submitted'])) {
     $user = new UsersModel($db);
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $userDetails = $user->checkUser($email, $password);
 
-    if ($user -> checkUser($email, $password) !== false) {
+    if ($userDetails !== false) {
         $displayError = false;
-        $_SESSION ['loggedIn'] = true;
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['user_id'] = $userDetails->getId();
         header('Location:index.php');
     }
     $displayError = true;
