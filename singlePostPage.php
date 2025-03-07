@@ -5,9 +5,13 @@ require_once 'src/Services/NavBarService.php';
 require_once 'src/Services/PostServices.php';
 require_once 'src/Models/PostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
+require_once 'src/Services/CommentFormService.php';
+require_once 'src/Models/CommentsModel.php';
+require_once 'src/Services/DisplayCommentsService.php';
 
 $db = DatabaseConnectionServices::connect();
 $posts = new PostsModel($db);
+$commentsModel = new CommentsModel($db);
 
 if (isset($_GET['id'])) {
     $pageId = intval($_GET['id']);
@@ -17,6 +21,23 @@ if (isset($_GET['id'])) {
 
 $postToDisplay = $posts->singlePagePost($pageId);
 $pageTitle = $postToDisplay->getTitle();
+
+$showSuccessMessage = false;
+$showErrorMessage = false;
+
+if(isset($_POST['comment_content'])) {
+    // store content of comment form in variable
+    $commentContent = $_POST['comment_content'];
+    // return a boolean depending on if comment meets validation requirements
+    $commentValidation = CommentFormService::validateCommentContent($commentContent);
+    if ($commentValidation) {
+        $showSuccessMessage = $commentsModel->insertCommentIntoTable($commentContent, $pageId, $_SESSION['user_id']);
+    } else {
+        $showErrorMessage = true;
+    }
+}
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,6 +53,19 @@ $pageTitle = $postToDisplay->getTitle();
     <?php
         echo NavBarService::displayNavBar();
         echo PostServices::displaySinglePost($postToDisplay);
+        if (isset($_SESSION['loggedIn'])) {
+            echo CommentFormService::displayForm();
+        }
+        if ($showSuccessMessage) {
+            echo CommentFormService::SUCCESS;
+        }
+        if ($showErrorMessage) {
+            echo CommentFormService::ERROR;
+        }
+
+        $commentsArray = $commentsModel->commentsThatBelongToPost($pageId);
+        echo DisplayCommentsService::displayAll($commentsArray);
+
     ?>
 </body>
 </html>
