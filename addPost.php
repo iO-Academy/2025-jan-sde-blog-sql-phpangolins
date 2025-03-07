@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 require_once 'src/Services/NavBarService.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
-require_once 'src/Services/AddPostsServices.php';
 require_once 'src/Services/PostServices.php';
 require_once 'src/Models/PostsModel.php';
 require_once 'src/Entities/CategoryEntity.php';
@@ -24,6 +23,9 @@ $contentError = false;
 $successMessage = false;
 
 if (isset($_POST['submitted'])) {
+
+$categoryID = $getCategories->getCategoryID($_POST['category_id']);
+
     $title = $_POST['title'];
     $content = $_POST['content'];
     $userID = $_SESSION['user_id'];
@@ -37,7 +39,7 @@ if (isset($_POST['submitted'])) {
     if ($validTitle === true && $validContent === true) {
         $db = DatabaseConnectionServices::connect();
         $addPost = new PostsModel($db);
-        $addPost->addPost($title, $content, $userID);
+        $addPost->addPost($title, $content, $userID );
         $successMessage = true;
     }
 
