@@ -36,7 +36,7 @@ class PostsModel{
 
     public function singlePagePost(int $id): PostEntity|false
     {
-        $query = $this->db->prepare('SELECT `posts`.`title`, `users`.`username` AS "author", `posts`.`date_time`, `posts`.`content`
+        $query = $this->db->prepare('SELECT `posts`.`title`, `users`.`username` AS "author", `posts`.`date_time`, `posts`.`content`, `posts`.`likes`, `posts`.`dislikes`
                                             FROM `posts`
                                             JOIN `users`
                                             ON `posts`.`user_id` = `users`.`id`
@@ -51,6 +51,24 @@ class PostsModel{
     public function addLike(int $postId) : void
     {
         $query = $this->db->prepare("UPDATE `posts` SET `likes` = `likes` + 1 WHERE `id` = :postId;");
+        $query->execute([':postId'=>$postId]);
+    }
+
+    public function addDislike(int $postId) : void
+    {
+        $query = $this->db->prepare("UPDATE `posts` SET `dislikes` = `dislikes` + 1 WHERE `id` = :postId;");
+        $query->execute([':postId'=>$postId]);
+    }
+
+    public function removeLike(int $postId) : void
+    {
+        $query = $this->db->prepare("UPDATE `posts` SET `likes` = `likes` - 1 WHERE `id` = :postId;");
+        $query->execute([':postId'=>$postId]);
+    }
+
+    public function removeDislike(int $postId) : void
+    {
+        $query = $this->db->prepare("UPDATE `posts` SET `dislikes` = `dislikes` - 1 WHERE `id` = :postId;");
         $query->execute([':postId'=>$postId]);
     }
 }

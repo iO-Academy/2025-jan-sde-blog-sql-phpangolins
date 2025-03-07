@@ -22,7 +22,7 @@ class PostEntity{
      * @param string $category
      * @param string $category2
      */
-    public function __construct(int $id = 1, string $title = '', ?string $author = '', string $content = '', string $date_time = '', int $likes = 1, int $dislikes = 1, string $category = '', string $category2 = '')
+    public function __construct(int $id = 1, string $title = '', ?string $author = '', string $content = '', string $date_time = '', int $likes = 0, int $dislikes = 0, string $category = '', string $category2 = '')
     {
         $this->id = $id;
         $this->title = $title;

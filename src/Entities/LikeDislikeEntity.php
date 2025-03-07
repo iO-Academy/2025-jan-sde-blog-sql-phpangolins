@@ -6,6 +6,7 @@ class LikeDislikeEntity
     private int $user_id;
     private int $post_id;
     private int $has_liked;
+    private int $has_disliked;
 
     public function getId(): int
     {
@@ -26,4 +27,10 @@ class LikeDislikeEntity
     {
         return $this->has_liked;
     }
+
+    public function getHasDisliked(): int
+    {
+        return $this->has_disliked;
+    }
+
 }
