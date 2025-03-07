@@ -25,10 +25,10 @@ class PostsModel{
         return false;
     }
 
-    public function addPost($title, $content, $userID): bool
+    public function addPost($title, $content, $userID, $category_id): bool
     {
-        $query = $this->db->prepare("INSERT INTO `posts` (`title`, `content`, `user_id`, `date_time`) VALUES (:title, :content, :user_id, NOW());");
-        if ($query->execute([':title' => $title, ':content' => $content, ':user_id' => $userID])) {
+        $query = $this->db->prepare("INSERT INTO `posts` (`title`, `content`, `user_id`, `date_time`, `category_id`) VALUES (:title, :content, :user_id, NOW(), :category_id);");
+        if ($query->execute([':title' => $title, ':content' => $content, ':user_id' => $userID, ':category_id' => $category_id])) {
             return true;
         }
         return false;
@@ -47,4 +47,6 @@ class PostsModel{
         }
         return false;
     }
+
+
 }

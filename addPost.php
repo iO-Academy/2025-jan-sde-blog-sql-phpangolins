@@ -3,13 +3,17 @@
 declare(strict_types=1);
 
 require_once 'src/Services/NavBarService.php';
-require_once 'src/Models/AddPostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
 require_once 'src/Services/AddPostsServices.php';
 require_once 'src/Services/PostServices.php';
 require_once 'src/Models/PostsModel.php';
+require_once 'src/Entities/CategoryEntity.php';
+require_once 'src/Models/CategoriesModel.php';
 
 session_start();
+
+$db = DatabaseConnectionServices::connect();
+$getCategories = new CategoriesModel($db);
 
 if (!isset($_SESSION['loggedIn']) || ($_SESSION['loggedIn'] === false)) {
     header('Location:login.php');
@@ -70,6 +74,22 @@ echo NavBarService::displayNavBar();
                 echo '<p class="text-center text-red-500">Title is too long! 30 characters max</p>';
             }
             ?>
+            <div class="w-full sm:w-1/3">
+                <label for="category" class="mb-3 block">Category:</label>
+                <select class="w-full px-3 py-[10.5px] text-lg bg-white" id="category" name="category_id">
+
+                    <?php
+                        $categories = $getCategories->getCategories();
+                        foreach ($categories as $category){
+                            echo "<option>$category->name</option>";
+                        }
+
+                    ?>
+                </select>
+                <?php
+                echo "hey";
+                ?>
+            </div>
         </div>
     </div>
     <div class="mb-5">
