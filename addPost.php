@@ -7,6 +7,7 @@ require_once 'src/Models/AddPostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
 require_once 'src/Services/AddPostsServices.php';
 require_once 'src/Services/PostServices.php';
+require_once 'src/Models/PostsModel.php';
 
 session_start();
 
@@ -31,7 +32,7 @@ if (isset($_POST['submitted'])) {
 
     if ($validTitle === true && $validContent === true) {
         $db = DatabaseConnectionServices::connect();
-        $addPost = new AddPostsModel($db);
+        $addPost = new PostsModel($db);
         $addPost->addPost($title, $content, $userID);
         $successMessage = true;
     }
