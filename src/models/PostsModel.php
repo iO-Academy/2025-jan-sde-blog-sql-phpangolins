@@ -25,7 +25,6 @@ class PostsModel{
         return false;
     }
 
-<<<<<<< HEAD
     public function addPost($title, $content, $userID): bool
     {
         $query = $this->db->prepare("INSERT INTO `posts` (`title`, `content`, `user_id`, `date_time`) VALUES (:title, :content, :user_id, NOW());");
@@ -34,7 +33,7 @@ class PostsModel{
         }
         return false;
     }
-=======
+
     public function singlePagePost(int $id): PostEntity|false
     {
         $query = $this->db->prepare('SELECT `posts`.`title`, `users`.`username` AS "author", `posts`.`date_time`, `posts`.`content`
@@ -48,6 +47,4 @@ class PostsModel{
         }
         return false;
     }
-
->>>>>>> 3de75c2d4325745beadb936899d16854e7ff58a1
 }

@@ -19,7 +19,6 @@ class PostServices
 
         return $outcome;
     }
-
     static public function displayHomepage(array $posts): string
     {
 
@@ -32,7 +31,7 @@ class PostServices
          return $outcome;
     }
 
-<<<<<<< HEAD
+
     static public function validTitle($titleLength): bool
     {
         if ($titleLength > 30) {
@@ -48,8 +47,7 @@ class PostServices
         }
         return true;
     }
-}
-=======
+
     static public function displaySinglePost(PostEntity $post): string
     {
         $date = date_create($post->getDateTime());
@@ -75,4 +73,4 @@ class PostServices
     }
 }
 
->>>>>>> 3de75c2d4325745beadb936899d16854e7ff58a1
+
