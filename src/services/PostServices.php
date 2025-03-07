@@ -1,5 +1,6 @@
 <?php
 require_once 'src/entities/PostEntity.php';
+require_once 'src/Services/LikesDislikesService.php';
 class PostServices
 {
     static public function displaySingleHomepage(PostEntity $post): string
@@ -52,8 +53,7 @@ class PostServices
 
         $outcome .= "<p>" . $post->getContent() . "</p>";
         $outcome .= '<div class="flex justify-center gap-5">';
-        $outcome .= '<a class="px-3 py-2 mt-4 text-lg bg-green-300 hover:bg-green-400 hover:text-white transition inline-block rounded-sm" href="#">Like</a>';
-        $outcome .= '<a class="px-3 py-2 mt-4 text-lg bg-red-300 hover:bg-red-400 hover:text-white transition inline-block rounded-sm" href="#">Dislike</a>';
+        $outcome .= LikesDislikesService::displayButtons($_SESSION['loggedIn']);
         $outcome .= '</div>';
         $outcome .= "<a class='px-3 py-2 mt-4 text-lg bg-indigo-400 hover:bg-indigo-700 hover:text-white transition inline-block rounded-sm' href='index.php'>View all posts</a>";
         $outcome .= "</article>";
