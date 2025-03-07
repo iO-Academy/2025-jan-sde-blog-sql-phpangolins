@@ -23,12 +23,11 @@ class PostServicesTest extends TestCase{
 
     $method = PostServices::displaySingleHomepage($post);
 
-        $this->assertStringContainsString('Title', $method);
-        $this->assertStringContainsString('Author', $method);
-        $this->assertStringContainsString('It is a long established fact that a reader will be distracted by the readable content of a page ', $method);
-        $this->assertStringContainsString('08/08/25', $method);
-       }
-
+    $this->assertStringContainsString('Title', $method);
+    $this->assertStringContainsString('Author', $method);
+    $this->assertStringContainsString('It is a long established fact that a reader will be distracted by the readable content of a page ', $method);
+    $this->assertStringContainsString('08/08/25', $method);
+    }
     public function testDisplayHomepage()
     {
         $post1 =new PostEntity(
@@ -45,7 +44,6 @@ class PostServicesTest extends TestCase{
          $this->assertStringContainsString('Title 1', $method);
          $this->assertStringContainsString('Title 2', $method);
     }
-
     public function test_displaySinglePost_correctDisplay() : void
     {
         $post = new PostEntity(title: 'title', author: 'test', content: 'this is content', date_time: '2025-08-08 00:00:00');
@@ -57,7 +55,6 @@ class PostServicesTest extends TestCase{
         $this->assertStringContainsString('this is content', $actual);
         $this->assertStringContainsString('08/08/25', $actual);
     }
-
     public function test_displaySinglePost_correctATagAndHref() : void
     {
         $fakeEntity = $this->createMock(PostEntity::class);
@@ -67,7 +64,6 @@ class PostServicesTest extends TestCase{
         $this->assertStringContainsString('</a>', $actual);
         $this->assertStringContainsString("href='index.php'", $actual);
     }
-
     public function test_displaySinglePost_anonymousAuthor() : void
     {
         $post = new PostEntity(author: '');
