@@ -22,8 +22,8 @@ if (isset($_GET['id'])) {
 $postToDisplay = $posts->singlePagePost($pageId);
 $pageTitle = $postToDisplay->getTitle();
 
-$successMessage = false;
-$errorMessage = false;
+$showSuccessMessage = false;
+$showErrorMessage = false;
 
 if(isset($_POST['comment_content'])) {
     // store content of comment form in variable
@@ -31,9 +31,9 @@ if(isset($_POST['comment_content'])) {
     // return a boolean depending on if comment meets validation requirements
     $commentValidation = CommentFormService::validateCommentContent($commentContent);
     if ($commentValidation) {
-        $successMessage = $commentsModel->insertCommentIntoTable($commentContent, $pageId, $_SESSION['user_id']);
+        $showSuccessMessage = $commentsModel->insertCommentIntoTable($commentContent, $pageId, $_SESSION['user_id']);
     } else {
-        $errorMessage = true;
+        $showErrorMessage = true;
     }
 }
 
@@ -56,10 +56,10 @@ if(isset($_POST['comment_content'])) {
         if (isset($_SESSION['loggedIn'])) {
             echo CommentFormService::displayForm();
         }
-        if ($successMessage) {
+        if ($showSuccessMessage) {
             echo CommentFormService::successMessage();
         }
-        if ($errorMessage) {
+        if ($showErrorMessage) {
             echo CommentFormService::errorMessage();
         }
 
