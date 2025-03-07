@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 require_once 'src/Services/NavBarService.php';
-require_once 'src/Models/AddPostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
-require_once 'src/Services/AddPostsServices.php';
+require_once 'src/Services/PostServices.php';
+require_once 'src/Models/PostsModel.php';
 
 session_start();
 
@@ -25,12 +25,12 @@ if (isset($_POST['submitted'])) {
     $titleLength = strlen($title);
     $contentLength = strlen($content);
 
-    $validTitle = AddPostsServices::validTitle($titleLength);
-    $validContent = AddPostsServices::validContent($contentLength);
+    $validTitle = PostServices::validTitle($titleLength);
+    $validContent = PostServices::validContent($contentLength);
 
     if ($validTitle === true && $validContent === true) {
         $db = DatabaseConnectionServices::connect();
-        $addPost = new AddPostsModel($db);
+        $addPost = new PostsModel($db);
         $addPost->addPost($title, $content, $userID);
         $successMessage = true;
     }
@@ -68,16 +68,6 @@ echo NavBarService::displayNavBar();
                 echo '<p class="text-center text-red-500">Title is too long! 30 characters max</p>';
             }
             ?>
-        </div>
-        <div class="w-full sm:w-1/3">
-            <label for="category" class="mb-3 block">Category:</label>
-            <select class="w-full px-3 py-[10.5px] text-lg bg-white" id="category">
-                <option>News</option>
-                <option>Gaming</option>
-                <option>Films</option>
-                <option>TV</option>
-                <option>Science and Nature</option>
-            </select>
         </div>
     </div>
     <div class="mb-5">
