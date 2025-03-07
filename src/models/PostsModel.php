@@ -1,7 +1,6 @@
 <?php
 
-class PostsModel
-{
+class PostsModel{
 
     public PDO $db;
 
@@ -18,11 +17,37 @@ class PostsModel
                                             ON `posts`.`category_id` = `categories`.`id`
                                             JOIN `users`
                                             ON `posts`.`user_id`=`users`.`id` ORDER BY `posts`.`date_time`;');
-        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, PostEntity::class);
+        $query -> setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, PostEntity::class);
         $query->execute();
-        if ($query->execute()) {
+        if ($query->execute()){
             return $query->fetchAll();
         }
         return false;
     }
+
+<<<<<<< HEAD
+    public function addPost($title, $content, $userID): bool
+    {
+        $query = $this->db->prepare("INSERT INTO `posts` (`title`, `content`, `user_id`, `date_time`) VALUES (:title, :content, :user_id, NOW());");
+        if ($query->execute([':title' => $title, ':content' => $content, ':user_id' => $userID])) {
+            return true;
+        }
+        return false;
+    }
+=======
+    public function singlePagePost(int $id): PostEntity|false
+    {
+        $query = $this->db->prepare('SELECT `posts`.`title`, `users`.`username` AS "author", `posts`.`date_time`, `posts`.`content`
+                                            FROM `posts`
+                                            JOIN `users`
+                                            ON `posts`.`user_id` = `users`.`id`
+                                            WHERE `posts`.`id` = :id;');
+        $query -> setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, PostEntity::class);
+        if ($query->execute([':id'=>$id])) {
+            return $query->fetch();
+        }
+        return false;
+    }
+
+>>>>>>> 3de75c2d4325745beadb936899d16854e7ff58a1
 }
