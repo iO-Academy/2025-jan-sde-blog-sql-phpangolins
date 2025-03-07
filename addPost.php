@@ -6,6 +6,7 @@ require_once 'src/Services/NavBarService.php';
 require_once 'src/Models/AddPostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
 require_once 'src/Services/AddPostsServices.php';
+require_once 'src/Services/PostServices.php';
 
 session_start();
 
@@ -25,8 +26,8 @@ if (isset($_POST['submitted'])) {
     $titleLength = strlen($title);
     $contentLength = strlen($content);
 
-    $validTitle = AddPostsServices::validTitle($titleLength);
-    $validContent = AddPostsServices::validContent($contentLength);
+    $validTitle = PostServices::validTitle($titleLength);
+    $validContent = PostServices::validContent($contentLength);
 
     if ($validTitle === true && $validContent === true) {
         $db = DatabaseConnectionServices::connect();
