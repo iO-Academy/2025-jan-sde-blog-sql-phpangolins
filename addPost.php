@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 require_once 'src/Services/NavBarService.php';
-require_once 'src/Models/AddPostsModel.php';
 require_once 'src/Services/DatabaseConnectionServices.php';
 require_once 'src/Services/AddPostsServices.php';
 require_once 'src/Services/PostServices.php';
